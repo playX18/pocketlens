@@ -20,6 +20,11 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: linux
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev \
+            libgtk-4-dev libadwaita-1-dev libglib2.0-dev
       - name: Format check
         run: cargo fmt --check
         working-directory: linux
