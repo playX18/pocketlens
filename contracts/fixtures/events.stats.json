@@ -1,0 +1,11 @@
+{
+  "type": "stats",
+  "session_id": "sess_0123456789abcdef",
+  "video_packets": 4200,
+  "audio_packets": 8400,
+  "video_packets_lost": 4,
+  "audio_packets_lost": 2,
+  "estimated_bitrate_kbps": 2400,
+  "quality_preset": "balanced"
+}
+

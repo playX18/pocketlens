@@ -1,0 +1,7 @@
+{
+  "error": {
+    "code": "invalid_pin",
+    "message": "The pairing PIN is invalid or expired."
+  }
+}
+

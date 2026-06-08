@@ -1,0 +1,7 @@
+{
+  "type": "warning",
+  "session_id": "sess_0123456789abcdef",
+  "code": "network_degraded",
+  "message": "Packet loss is above the balanced preset target."
+}
+

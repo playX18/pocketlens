@@ -1,0 +1,82 @@
+# Android
+*.apk
+*.aab
+*.dex
+*.class
+*.jar
+*.aar
+*.ap_
+*.dex
+android/.gradle/
+android/**/build/
+android/**/local.properties
+android/**/.cxx/
+android/**/.navigation/
+android/**/captures/
+android/**/output.json
+android/**/output-metadata.json
+
+# Rust/Cargo
+**/target/
+**/Cargo.lock
+**/*.rs.bk
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Build
+build/
+out/
+dist/
+*.o
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Package managers
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+*.cover
+*.py,cover
+htmlcov/
+
+# Misc
+*.bak
+*.tmp
+*.temp
+*.orig
+*~

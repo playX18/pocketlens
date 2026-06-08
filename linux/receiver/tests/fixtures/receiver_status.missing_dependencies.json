@@ -1,0 +1,44 @@
+{
+  "receiver_name": "ACamera Linux",
+  "protocol_version": 1,
+  "service_type": "_acamera._udp.local",
+  "paired": false,
+  "active_session": false,
+  "capabilities": {
+    "video_codecs": ["h264"],
+    "audio_codecs": ["opus"],
+    "quality_presets": ["low", "balanced", "high"],
+    "adaptive_quality": true,
+    "secure_pairing": true,
+    "encrypted_rtp": true
+  },
+  "virtual_devices": {
+    "camera": {
+      "name": "ACamera",
+      "ready": false,
+      "backend": "v4l2loopback"
+    },
+    "microphone": {
+      "name": "ACamera Microphone",
+      "ready": false,
+      "backend": "pipewire"
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "missing_v4l2loopback",
+      "severity": "error",
+      "message": "v4l2loopback is not loaded; create a virtual camera before starting a session."
+    },
+    {
+      "code": "missing_pipewire",
+      "severity": "error",
+      "message": "PipeWire is not running; start PipeWire before exposing the virtual microphone."
+    },
+    {
+      "code": "missing_gstreamer",
+      "severity": "error",
+      "message": "GStreamer RTP decode plugins are not available."
+    }
+  ]
+}

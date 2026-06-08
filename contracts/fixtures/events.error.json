@@ -1,0 +1,7 @@
+{
+  "type": "error",
+  "session_id": "sess_0123456789abcdef",
+  "code": "media_pipeline_failed",
+  "message": "The Linux media pipeline stopped unexpectedly."
+}
+

@@ -1,0 +1,27 @@
+{
+  "session_id": "sess_0123456789abcdef",
+  "receiver_host": "192.168.1.25",
+  "video_rtp_port": 5004,
+  "audio_rtp_port": 5006,
+  "video_payload_type": 96,
+  "audio_payload_type": 97,
+  "ssrc_video": 305419896,
+  "ssrc_audio": 2596069104,
+  "quality_preset": "balanced",
+  "video": {
+    "codec": "h264",
+    "width": 1280,
+    "height": 720,
+    "fps": 30
+  },
+  "audio": {
+    "codec": "opus",
+    "sample_rate_hz": 48000,
+    "channels": 1
+  },
+  "media_encryption": {
+    "mode": "aes_256_gcm_v1",
+    "video_key": "5548b84ddbc07f84011786181e55abc8937d3ea366dec8336a227f335d6b2bdd",
+    "audio_key": "d6c7a78bc840d4d0e6f0eb515cdebabcbded9677dfc7066c9ff9697b0ebe855b"
+  }
+}

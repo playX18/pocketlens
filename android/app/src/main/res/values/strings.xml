@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ACamera</string>
+
+    <!-- Step titles -->
+    <string name="step_find_pc">Find PC</string>
+    <string name="step_pairing">Pairing</string>
+    <string name="step_stream">Stream</string>
+
+    <!-- Find PC -->
+    <string name="pcs_nearby">PCs nearby</string>
+    <string name="refresh">Refresh</string>
+    <string name="connect">Connect</string>
+    <string name="enter_address_manually">Enter address manually</string>
+    <string name="manual_connect">Manual connect</string>
+    <string name="pc_address">PC address</string>
+    <string name="pc_address_hint">192.168.1.25</string>
+    <string name="port">Port</string>
+    <string name="waiting_for_pc">Waiting for PC…</string>
+
+    <!-- Pairing -->
+    <string name="enter_on_pc">Enter on your PC</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Stream -->
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="mute">Mute</string>
+    <string name="unmute">Unmute</string>
+    <string name="pause_video">Pause video</string>
+    <string name="resume_video">Resume video</string>
+    <string name="flip">Flip</string>
+    <string name="change_pc">Change PC</string>
+    <string name="quality_save_data">Save data</string>
+    <string name="quality_balanced">Balanced</string>
+    <string name="quality_best">Best</string>
+
+    <!-- Notification -->
+    <string name="notification_channel_streaming">ACamera streaming</string>
+    <string name="notification_streaming_title">ACamera is streaming</string>
+    <string name="notification_streaming_body">Camera and mic active</string>
+</resources>

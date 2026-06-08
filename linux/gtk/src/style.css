@@ -1,0 +1,53 @@
+.status-caption {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 4px 6px 0;
+}
+
+.status-idle {
+  color: @theme_fg_color;
+  opacity: 0.7;
+}
+
+.status-ready {
+  color: @success_color;
+}
+
+.status-active {
+  color: @accent_color;
+}
+
+.status-error {
+  color: @error_color;
+}
+
+.device-success .subtitle {
+  color: @success_color;
+}
+
+.device-error .subtitle {
+  color: @error_color;
+}
+
+.actions-box {
+  padding: 2px 6px;
+}
+
+.pill-button {
+  min-height: 44px;
+  border-radius: 10px;
+}
+
+.pairing-bar {
+  padding: 12px 18px;
+  background-color: @accent_bg_color;
+}
+
+.log-view {
+  padding: 8px;
+}
+
+.apk-result {
+  font-size: 0.9em;
+  margin-top: 4px;
+}
