@@ -4,6 +4,7 @@
 *.dex
 *.class
 *.jar
+!android/gradle/wrapper/gradle-wrapper.jar
 *.aar
 *.ap_
 *.dex
