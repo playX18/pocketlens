@@ -34,7 +34,7 @@ jobs:
           mkdir -p staging/bin staging/share/pocketlens
           cp linux/target/release/pocketlens-receiver staging/bin/
           cp linux/target/release/pocketlens-gtk staging/bin/
-          cp android/app/build/outputs/apk/release/*.apk staging/share/pocketlens/pocketlens.apk 2>/dev/null || true
+          cp android/app/build/outputs/apk/debug/*.apk staging/share/pocketlens/pocketlens.apk 2>/dev/null || true
           tar -czf "${TARBALL}" -C staging .
           echo "TARBALL=${TARBALL}" >> "$GITHUB_ENV"
       - uses: actions/upload-artifact@v4
@@ -152,12 +152,12 @@ jobs:
           java-version: 17
       - uses: gradle/actions/setup-gradle@v6
       - name: Build APK
-        run: ./gradlew assembleRelease
+        run: ./gradlew assembleDebug
         working-directory: android
       - uses: actions/upload-artifact@v4
         with:
           name: android-apk
-          path: android/app/build/outputs/apk/release/*.apk
+          path: android/app/build/outputs/apk/debug/*.apk
 
   publish:
     runs-on: ubuntu-latest
