@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ACamera</string>
+    <string name="app_name">PocketLens</string>
 
     <!-- Step titles -->
     <string name="step_find_pc">Find PC</string>
@@ -36,7 +36,7 @@
     <string name="quality_best">Best</string>
 
     <!-- Notification -->
-    <string name="notification_channel_streaming">ACamera streaming</string>
-    <string name="notification_streaming_title">ACamera is streaming</string>
+    <string name="notification_channel_streaming">PocketLens streaming</string>
+    <string name="notification_streaming_title">PocketLens is streaming</string>
     <string name="notification_streaming_body">Camera and mic active</string>
 </resources>

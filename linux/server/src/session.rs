@@ -99,11 +99,11 @@ impl SessionManager {
                     audio: audio.clone(),
                 });
                 let video_key = crypto::hex_encode(&crypto::derive_key(&[
-                    b"acamera-media-video-v1",
+                    b"pocketlens-media-video-v1",
                     session_id.as_bytes(),
                 ]));
                 let audio_key = crypto::hex_encode(&crypto::derive_key(&[
-                    b"acamera-media-audio-v1",
+                    b"pocketlens-media-audio-v1",
                     session_id.as_bytes(),
                 ]));
                 self.state = SessionStateName::Active;

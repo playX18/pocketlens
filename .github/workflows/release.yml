@@ -30,17 +30,17 @@ jobs:
       - name: Package binary tarball
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
-          TARBALL="acamera-${VERSION}-linux-amd64.tar.gz"
-          mkdir -p staging/bin staging/share/acamera
-          cp linux/target/release/acamera-receiver staging/bin/
-          cp linux/target/release/acamera-gtk staging/bin/
-          cp android/app/build/outputs/apk/release/*.apk staging/share/acamera/acamera.apk 2>/dev/null || true
+          TARBALL="pocketlens-${VERSION}-linux-amd64.tar.gz"
+          mkdir -p staging/bin staging/share/pocketlens
+          cp linux/target/release/pocketlens-receiver staging/bin/
+          cp linux/target/release/pocketlens-gtk staging/bin/
+          cp android/app/build/outputs/apk/release/*.apk staging/share/pocketlens/pocketlens.apk 2>/dev/null || true
           tar -czf "${TARBALL}" -C staging .
           echo "TARBALL=${TARBALL}" >> "$GITHUB_ENV"
       - uses: actions/upload-artifact@v4
         with:
           name: linux-tarball
-          path: acamera-*-linux-amd64.tar.gz
+          path: pocketlens-*-linux-amd64.tar.gz
 
   build-deb:
     runs-on: ubuntu-latest
@@ -58,33 +58,33 @@ jobs:
       - name: Build .deb
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
-          PKGDIR="acamera_${VERSION}_amd64"
+          PKGDIR="pocketlens_${VERSION}_amd64"
           mkdir -p "${PKGDIR}/DEBIAN"
           mkdir -p "${PKGDIR}/usr/bin"
           mkdir -p "${PKGDIR}/usr/share/applications"
-          mkdir -p "${PKGDIR}/usr/share/acamera"
-          cp bin/acamera-receiver "${PKGDIR}/usr/bin/"
-          cp bin/acamera-gtk "${PKGDIR}/usr/bin/"
+          mkdir -p "${PKGDIR}/usr/share/pocketlens"
+          cp bin/pocketlens-receiver "${PKGDIR}/usr/bin/"
+          cp bin/pocketlens-gtk "${PKGDIR}/usr/bin/"
           chmod 755 "${PKGDIR}/usr/bin/"*
-          cp apk/*.apk "${PKGDIR}/usr/share/acamera/acamera.apk" 2>/dev/null || true
+          cp apk/*.apk "${PKGDIR}/usr/share/pocketlens/pocketlens.apk" 2>/dev/null || true
           cat > "${PKGDIR}/DEBIAN/control" << EOF
-          Package: acamera
+          Package: pocketlens
           Version: ${VERSION}
           Section: video
           Priority: optional
           Architecture: amd64
           Depends: libgtk-4-1, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-libav, v4l2loopback-dkms, pipewire, pulseaudio-utils
-          Maintainer: ACamera <noreply@github.com>
+          Maintainer: PocketLens <noreply@github.com>
           Description: Use an Android phone as a Linux camera and microphone
-          ACamera streams your Android camera and microphone to a Linux desktop,
+          PocketLens streams your Android camera and microphone to a Linux desktop,
           creating virtual video and audio devices for any application.
           EOF
-          cat > "${PKGDIR}/usr/share/applications/acamera.desktop" << EOF
+          cat > "${PKGDIR}/usr/share/applications/pocketlens.desktop" << EOF
           [Desktop Entry]
           Type=Application
-          Name=ACamera
+          Name=PocketLens
           Comment=Use an Android phone as a Linux camera and microphone
-          Exec=/usr/bin/acamera-gtk
+          Exec=/usr/bin/pocketlens-gtk
           Terminal=false
           Categories=AudioVideo;Video;
           Icon=camera-web
@@ -94,7 +94,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: deb-package
-          path: acamera_*.deb
+          path: pocketlens_*.deb
 
   build-appimage:
     runs-on: ubuntu-latest
@@ -112,18 +112,18 @@ jobs:
       - name: Build AppImage
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
-          APPDIR="ACamera.AppDir"
-          mkdir -p "${APPDIR}/usr/bin" "${APPDIR}/usr/share/applications" "${APPDIR}/usr/share/acamera" "${APPDIR}/usr/share/icons/hicolor/256x256/apps"
-          cp bin/acamera-receiver "${APPDIR}/usr/bin/"
-          cp bin/acamera-gtk "${APPDIR}/usr/bin/"
+          APPDIR="PocketLens.AppDir"
+          mkdir -p "${APPDIR}/usr/bin" "${APPDIR}/usr/share/applications" "${APPDIR}/usr/share/pocketlens" "${APPDIR}/usr/share/icons/hicolor/256x256/apps"
+          cp bin/pocketlens-receiver "${APPDIR}/usr/bin/"
+          cp bin/pocketlens-gtk "${APPDIR}/usr/bin/"
           chmod 755 "${APPDIR}/usr/bin/"*
-          cp apk/*.apk "${APPDIR}/usr/share/acamera/acamera.apk" 2>/dev/null || true
-          cat > "${APPDIR}/acamera.desktop" << EOF
+          cp apk/*.apk "${APPDIR}/usr/share/pocketlens/pocketlens.apk" 2>/dev/null || true
+          cat > "${APPDIR}/pocketlens.desktop" << EOF
           [Desktop Entry]
           Type=Application
-          Name=ACamera
+          Name=PocketLens
           Comment=Use an Android phone as a Linux camera and microphone
-          Exec=acamera-gtk
+          Exec=pocketlens-gtk
           Terminal=false
           Categories=AudioVideo;Video;
           Icon=camera-web
@@ -132,15 +132,15 @@ jobs:
           #!/bin/bash
           APPDIR="$(dirname "$(readlink -f "$0")")"
           export PATH="${APPDIR}/usr/bin:${PATH}"
-          exec acamera-gtk "$@"
+          exec pocketlens-gtk "$@"
           APPRUN
           chmod +x "${APPDIR}/AppRun"
-          VERSION="${VERSION}" appimage/appimagetool --appimage-extract-and-run "${APPDIR}" "ACamera-${VERSION}-x86_64.AppImage" 2>/dev/null || \
+          VERSION="${VERSION}" appimage/appimagetool --appimage-extract-and-run "${APPDIR}" "PocketLens-${VERSION}-x86_64.AppImage" 2>/dev/null || \
             echo "appimagetool not available, skipping AppImage build"
       - uses: actions/upload-artifact@v4
         with:
           name: appimage
-          path: ACamera-*.AppImage
+          path: PocketLens-*.AppImage
 
   build-apk:
     runs-on: ubuntu-latest

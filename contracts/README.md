@@ -1,17 +1,17 @@
-# ACamera Shared Contract Fixtures
+# PocketLens Shared Contract Fixtures
 
 These fixtures are the source of truth for Android and Linux contract tests.
 
 The v1 wire contract is intentionally small:
 
-- Discovery service type: `_acamera._udp.local`
+- Discovery service type: `_pocketlens._udp.local`
 - Control API: JSON over HTTP plus WebSocket events
 - Media API: RTP over UDP
 - Video codec: H.264
 - Audio codec: Opus
 - Quality presets: `low`, `balanced`, `high`
-- Virtual camera name: `ACamera`
-- Virtual microphone name: `ACamera Microphone`
+- Virtual camera name: `PocketLens`
+- Virtual microphone name: `PocketLens Microphone`
 
 You may copy these fixtures into platform-specific test resources, but changes to field names or semantics must update both Android and Linux tests in the same change.
 

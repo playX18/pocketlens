@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.acamera.android"
+    namespace = "com.pocketlens.android"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.acamera.android"
+        applicationId = "com.pocketlens.android"
         minSdk = 29
         targetSdk = 36
         versionCode = 1

@@ -84,11 +84,11 @@ impl MdnsAdvertiser for SystemMdnsAdvertiser {
             Ok(service) => {
                 self.fullname = Some(service.get_fullname().to_string());
                 if let Err(error) = self.daemon.register(service) {
-                    tracing::warn!(%error, "failed to register ACamera mDNS service");
+                    tracing::warn!(%error, "failed to register PocketLens mDNS service");
                 }
             }
             Err(error) => {
-                tracing::warn!(%error, "failed to build ACamera mDNS service info");
+                tracing::warn!(%error, "failed to build PocketLens mDNS service info");
             }
         }
     }
@@ -97,10 +97,10 @@ impl MdnsAdvertiser for SystemMdnsAdvertiser {
         if let Some(fullname) = self.fullname.take()
             && let Err(error) = self.daemon.unregister(&fullname)
         {
-            tracing::warn!(%error, "failed to unregister ACamera mDNS service");
+            tracing::warn!(%error, "failed to unregister PocketLens mDNS service");
         }
         if let Err(error) = self.daemon.shutdown() {
-            tracing::warn!(%error, "failed to shutdown ACamera mDNS daemon");
+            tracing::warn!(%error, "failed to shutdown PocketLens mDNS daemon");
         }
     }
 }
@@ -163,11 +163,11 @@ mod tests {
     }
 
     #[test]
-    fn advertiser_uses_acamera_service_type() {
+    fn advertiser_uses_pocketlens_service_type() {
         let mut advertiser = FakeAdvertiser::default();
         advertise_receiver(&mut advertiser, "Desk", 47650);
         assert_eq!(advertiser.calls.len(), 1);
-        assert_eq!(advertiser.calls[0].0, "_acamera._udp.local");
+        assert_eq!(advertiser.calls[0].0, "_pocketlens._udp.local");
         assert_eq!(advertiser.calls[0].1, "Desk");
         assert_eq!(advertiser.calls[0].2, 47650);
     }

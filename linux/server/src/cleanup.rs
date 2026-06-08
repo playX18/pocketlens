@@ -1,7 +1,7 @@
 use anyhow::Result;
 use sysinfo::{ProcessRefreshKind, ProcessesToUpdate, System};
 
-const TARGET_NAMES: &[&str] = &["acamera-receiver", "gst-launch-1.0"];
+const TARGET_NAMES: &[&str] = &["pocketlens-receiver", "gst-launch-1.0"];
 
 pub fn cleanup_processes() -> Result<()> {
     let mut sys = System::new();

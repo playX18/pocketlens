@@ -21,7 +21,7 @@
   },
   "media_encryption": {
     "mode": "aes_256_gcm_v1",
-    "video_key": "5548b84ddbc07f84011786181e55abc8937d3ea366dec8336a227f335d6b2bdd",
-    "audio_key": "d6c7a78bc840d4d0e6f0eb515cdebabcbded9677dfc7066c9ff9697b0ebe855b"
+    "video_key": "517924d09d3f6df62d9a0c8d83b1147823d28c2a6119e30c61476cd6f5ea53c2",
+    "audio_key": "5245b0b3f653fce6a3cdc4d3d3f5c57bbf57bd33c491780b349323865d0dc10b"
   }
 }

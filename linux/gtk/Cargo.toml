@@ -1,11 +1,11 @@
 [package]
-name = "acamera-gtk"
+name = "pocketlens-gtk"
 edition.workspace = true
 license.workspace = true
 version.workspace = true
 
 [[bin]]
-name = "acamera-gtk"
+name = "pocketlens-gtk"
 path = "src/main.rs"
 
 [dependencies]

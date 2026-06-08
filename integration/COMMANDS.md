@@ -1,4 +1,4 @@
-# ACamera Verification Commands
+# PocketLens Verification Commands
 
 Use these commands from the repository root.
 
@@ -10,19 +10,15 @@ python3 integration/verify_contract_fixtures.py
 
 ## Android
 
-The local Android SDK is persisted at:
-
-```text
-/home/adel/.local/share/acamera/android-sdk
-```
-
-`android/local.properties` points Gradle at that SDK.
+Install and configure the Android SDK per the
+[Android Studio](https://developer.android.com/studio) or
+[command-line tools](https://developer.android.com/studio#command-line-tools-only)
+documentation. Set `ANDROID_HOME` / `ANDROID_SDK_ROOT` as described in
+[Configure SDK environment variables](https://developer.android.com/tools/variables),
+or let Android Studio generate `android/local.properties` (gitignored).
 
 ```sh
 cd android
-JAVA_HOME=/opt/android-studio-for-platform/jbr \
-ANDROID_HOME=/home/adel/.local/share/acamera/android-sdk \
-ANDROID_SDK_ROOT=/home/adel/.local/share/acamera/android-sdk \
 ./gradlew test assembleDebug
 ```
 
@@ -35,7 +31,7 @@ adb install -r android/app/build/outputs/apk/debug/app-debug.apk
 Launch it:
 
 ```sh
-adb shell monkey -p com.acamera.android -c android.intent.category.LAUNCHER 1
+adb shell monkey -p com.pocketlens.android -c android.intent.category.LAUNCHER 1
 ```
 
 ## Linux
@@ -45,6 +41,5 @@ cd linux
 cargo fmt --check
 cargo check
 cargo test
-cargo run -p acamera-receiver -- --diagnose
+cargo run -p pocketlens-receiver -- --diagnose
 ```
-

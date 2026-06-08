@@ -1,7 +1,7 @@
 {
-  "receiver_name": "ACamera Linux",
+  "receiver_name": "PocketLens Linux",
   "protocol_version": 1,
-  "service_type": "_acamera._udp.local",
+  "service_type": "_pocketlens._udp.local",
   "paired": false,
   "active_session": false,
   "capabilities": {
@@ -14,12 +14,12 @@
   },
   "virtual_devices": {
     "camera": {
-      "name": "ACamera",
+      "name": "PocketLens",
       "ready": true,
       "backend": "v4l2loopback"
     },
     "microphone": {
-      "name": "ACamera Microphone",
+      "name": "PocketLens Microphone",
       "ready": true,
       "backend": "pipewire"
     }

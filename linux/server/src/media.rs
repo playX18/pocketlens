@@ -651,7 +651,9 @@ mod tests {
         assert!(line.contains("udpsrc port=5006"));
         assert!(line.contains("encoding-name=OPUS,payload=97,clock-rate=48000,ssrc=2596069104"));
         assert!(line.contains("rtpopusdepay ! opusdec ! audioconvert ! audioresample"));
-        assert!(line.contains("pulsesink device=acamera_sink client-name=\"ACamera Microphone\""));
+        assert!(
+            line.contains("pulsesink device=pocketlens_sink client-name=\"PocketLens Microphone\"")
+        );
     }
 
     #[test]

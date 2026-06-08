@@ -2,10 +2,10 @@ use clap::ValueEnum;
 use serde::{Deserialize, Serialize};
 
 pub const PROTOCOL_VERSION: u16 = 1;
-pub const SERVICE_TYPE: &str = "_acamera._udp.local";
-pub const DEVICE_CAMERA_NAME: &str = "ACamera";
-pub const DEVICE_MICROPHONE_NAME: &str = "ACamera Microphone";
-pub const RECEIVER_NAME: &str = "ACamera Linux";
+pub const SERVICE_TYPE: &str = "_pocketlens._udp.local";
+pub const DEVICE_CAMERA_NAME: &str = "PocketLens";
+pub const DEVICE_MICROPHONE_NAME: &str = "PocketLens Microphone";
+pub const RECEIVER_NAME: &str = "PocketLens Linux";
 pub const DEFAULT_RECEIVER_HOST: &str = "192.168.1.25";
 pub const DEFAULT_VIDEO_RTP_PORT: u16 = 5004;
 pub const DEFAULT_AUDIO_RTP_PORT: u16 = 5006;

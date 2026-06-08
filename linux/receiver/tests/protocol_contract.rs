@@ -1,4 +1,4 @@
-use acamera_receiver::protocol::{
+use pocketlens_receiver::protocol::{
     ApiErrorResponse, EventMessage, PairRequest, PairResponse, SessionStartRequest,
     SessionStartResponse, SessionStopRequest, SessionStopResponse, StatusResponse,
 };

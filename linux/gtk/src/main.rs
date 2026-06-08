@@ -7,6 +7,7 @@ use std::process::{Child, Command, Stdio};
 use std::rc::Rc;
 use std::time::Duration;
 
+use adw::prelude::*;
 use gtk::glib;
 use gtk::prelude::*;
 use gtk::{
@@ -14,9 +15,8 @@ use gtk::{
     TextBuffer, TextView,
 };
 use libadwaita as adw;
-use adw::prelude::*;
 
-const APP_ID: &str = "com.acamera.Launcher";
+const APP_ID: &str = "com.pocketlens.Launcher";
 const DEFAULT_CONTROL_PORT: &str = "47650";
 const DEFAULT_VIDEO_PORT: &str = "5004";
 const DEFAULT_AUDIO_PORT: &str = "5006";
@@ -297,7 +297,7 @@ fn build_ui(app: &adw::Application) {
         .build();
 
     let startup_banner = adw::Banner::builder()
-        .title("Start ACamera automatically at login?")
+        .title("Start PocketLens automatically at login?")
         .button_label("Enable")
         .revealed(!startup_prompt_seen())
         .build();
@@ -329,7 +329,7 @@ fn build_ui(app: &adw::Application) {
 
     let header = adw::HeaderBar::new();
     let header_title = Label::builder()
-        .label("ACamera")
+        .label("PocketLens")
         .css_classes(["title"])
         .build();
     header.set_title_widget(Some(&header_title));
@@ -533,7 +533,7 @@ fn build_ui(app: &adw::Application) {
                     append_log(
                         &log,
                         &format!(
-                            "Port {control_port} is already in use, but it is not a compatible ACamera receiver: {error}"
+                            "Port {control_port} is already in use, but it is not a compatible PocketLens receiver: {error}"
                         ),
                     );
                     return;
@@ -619,7 +619,7 @@ fn build_ui(app: &adw::Application) {
 
     let window = adw::ApplicationWindow::builder()
         .application(app)
-        .title("ACamera")
+        .title("PocketLens")
         .default_width(420)
         .default_height(580)
         .content(&toolbar_view)
@@ -776,19 +776,19 @@ fn receiver_binary() -> PathBuf {
     if let Ok(path) = std::env::current_exe()
         && let Some(dir) = path.parent()
     {
-        let sibling = dir.join("acamera-receiver");
+        let sibling = dir.join("pocketlens-receiver");
         if sibling.exists() {
             return sibling;
         }
     }
-    PathBuf::from("acamera-receiver")
+    PathBuf::from("pocketlens-receiver")
 }
 
 fn run_receiver_command(args: &[&str]) -> Result<String, String> {
     let output = Command::new(receiver_binary())
         .args(args)
         .output()
-        .map_err(|error| format!("failed to run acamera-receiver: {error}"))?;
+        .map_err(|error| format!("failed to run pocketlens-receiver: {error}"))?;
     if output.status.success() {
         Ok(String::from_utf8_lossy(&output.stdout).trim().to_string())
     } else {
@@ -955,7 +955,7 @@ fn parse_receiver_status(payload: &str) -> Result<(), String> {
         != Some(true)
     {
         return Err(
-            "receiver does not support secure pairing; reinstall/update ACamera".to_string(),
+            "receiver does not support secure pairing; reinstall/update PocketLens".to_string(),
         );
     }
     if capabilities
@@ -964,7 +964,7 @@ fn parse_receiver_status(payload: &str) -> Result<(), String> {
         != Some(true)
     {
         return Err(
-            "receiver does not support encrypted media; reinstall/update ACamera".to_string(),
+            "receiver does not support encrypted media; reinstall/update PocketLens".to_string(),
         );
     }
     Ok(())
@@ -1050,8 +1050,8 @@ fn bundled_apk_path() -> Option<PathBuf> {
     let exe = std::env::current_exe().ok()?;
     let dir = exe.parent()?;
     [
-        dir.join("../share/acamera/acamera.apk"),
-        dir.join("share/acamera/acamera.apk"),
+        dir.join("../share/pocketlens/pocketlens.apk"),
+        dir.join("share/pocketlens/pocketlens.apk"),
     ]
     .into_iter()
     .find(|path| path.exists())
@@ -1081,12 +1081,12 @@ fn config_dir() -> PathBuf {
         .map(PathBuf::from)
         .or_else(|| std::env::var_os("HOME").map(|home| PathBuf::from(home).join(".config")))
         .unwrap_or_else(|| PathBuf::from("."))
-        .join("acamera")
+        .join("pocketlens")
 }
 
 fn startup_service_status() -> &'static str {
     match Command::new("systemctl")
-        .args(["--user", "is-enabled", "acamera-receiver.service"])
+        .args(["--user", "is-enabled", "pocketlens-receiver.service"])
         .output()
     {
         Ok(output) if output.status.success() => "Startup: enabled",
@@ -1097,22 +1097,22 @@ fn startup_service_status() -> &'static str {
 fn enable_startup_service() -> Result<(), String> {
     install_startup_unit()?;
     run_systemctl(&["--user", "daemon-reload"])?;
-    run_systemctl(&["--user", "enable", "acamera-receiver.service"])?;
+    run_systemctl(&["--user", "enable", "pocketlens-receiver.service"])?;
     Ok(())
 }
 
 fn disable_startup_service() -> Result<(), String> {
-    run_systemctl(&["--user", "disable", "acamera-receiver.service"])
+    run_systemctl(&["--user", "disable", "pocketlens-receiver.service"])
 }
 
 fn install_startup_unit() -> Result<(), String> {
     let unit_dir = systemd_user_dir();
     fs::create_dir_all(&unit_dir).map_err(|error| format!("creating systemd user dir: {error}"))?;
-    let unit_path = unit_dir.join("acamera-receiver.service");
+    let unit_path = unit_dir.join("pocketlens-receiver.service");
     let receiver = receiver_binary();
     let unit = format!(
         "[Unit]\n\
-         Description=ACamera receiver\n\
+         Description=PocketLens receiver\n\
          After=network-online.target\n\n\
          [Service]\n\
          ExecStart={} --control-port {} --video-port {} --audio-port {} --camera-device /dev/video10\n\
@@ -1207,9 +1207,9 @@ mod tests {
     fn accepts_compatible_receiver_status() {
         parse_receiver_status(
             r#"{
-                "receiver_name": "ACamera Linux",
+                "receiver_name": "PocketLens Linux",
                 "protocol_version": 1,
-                "service_type": "_acamera._udp.local",
+                "service_type": "_pocketlens._udp.local",
                 "paired": false,
                 "active_session": false,
                 "capabilities": {
@@ -1221,8 +1221,8 @@ mod tests {
                     "encrypted_rtp": true
                 },
                 "virtual_devices": {
-                    "camera": {"name": "ACamera", "ready": true, "backend": "v4l2loopback"},
-                    "microphone": {"name": "ACamera Microphone", "ready": true, "backend": "pipewire"}
+                    "camera": {"name": "PocketLens", "ready": true, "backend": "v4l2loopback"},
+                    "microphone": {"name": "PocketLens Microphone", "ready": true, "backend": "pipewire"}
                 },
                 "diagnostics": []
             }"#,

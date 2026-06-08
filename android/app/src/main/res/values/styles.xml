@@ -1,5 +1,5 @@
 <resources>
-    <style name="Theme.ACamera" parent="android:style/Theme.Material.Light.NoActionBar">
+    <style name="Theme.PocketLens" parent="android:style/Theme.Material.Light.NoActionBar">
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:colorAccent">#1F7A5C</item>
     </style>

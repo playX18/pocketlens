@@ -15,10 +15,10 @@
 
     <application
         android:allowBackup="false"
-        android:label="ACamera"
+        android:label="PocketLens"
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ACamera"
+        android:theme="@style/Theme.PocketLens"
         android:usesCleartextTraffic="true">
         <service
             android:name=".foreground.StreamingForegroundService"

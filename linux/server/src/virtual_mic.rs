@@ -1,9 +1,9 @@
 use std::process::Command;
 
-pub const DEFAULT_SINK_NAME: &str = "acamera_sink";
-pub const DEFAULT_SOURCE_NAME: &str = "acamera_microphone";
-pub const DEFAULT_SINK_DESCRIPTION: &str = "ACamera Audio Sink";
-pub const DEFAULT_SOURCE_DESCRIPTION: &str = "ACamera Microphone";
+pub const DEFAULT_SINK_NAME: &str = "pocketlens_sink";
+pub const DEFAULT_SOURCE_NAME: &str = "pocketlens_microphone";
+pub const DEFAULT_SINK_DESCRIPTION: &str = "PocketLens Audio Sink";
+pub const DEFAULT_SOURCE_DESCRIPTION: &str = "PocketLens Microphone";
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct CommandSpec {
@@ -196,8 +196,8 @@ mod tests {
             vec![
                 "load-module",
                 "module-null-sink",
-                "sink_name=acamera_sink",
-                "sink_properties=device.description=ACamera Audio Sink",
+                "sink_name=pocketlens_sink",
+                "sink_properties=device.description=PocketLens Audio Sink",
                 "rate=48000",
                 "channels=2"
             ]
@@ -207,9 +207,9 @@ mod tests {
             vec![
                 "load-module",
                 "module-remap-source",
-                "master=acamera_sink.monitor",
-                "source_name=acamera_microphone",
-                "source_properties=device.description=ACamera Microphone"
+                "master=pocketlens_sink.monitor",
+                "source_name=pocketlens_microphone",
+                "source_properties=device.description=PocketLens Microphone"
             ]
         );
     }
@@ -230,8 +230,8 @@ mod tests {
     #[test]
     fn parses_virtual_microphone_module_ids() {
         let output = "\
-41\tmodule-null-sink\tsink_name=acamera_sink channels=2
-42\tmodule-remap-source\tmaster=acamera_sink.monitor source_name=acamera_microphone
+41\tmodule-null-sink\tsink_name=pocketlens_sink channels=2
+42\tmodule-remap-source\tmaster=pocketlens_sink.monitor source_name=pocketlens_microphone
 43\tmodule-null-sink\tsink_name=other
 ";
 
@@ -245,7 +245,7 @@ mod tests {
     fn parses_short_source_listing() {
         let output = "\
 12\talsa_input.pci-0000_00_1f.3.analog-stereo\tPipeWire\ts32le 2ch 48000Hz
-13\tacamera_microphone\tPipeWire\tfloat32le 2ch 48000Hz
+13\tpocketlens_microphone\tPipeWire\tfloat32le 2ch 48000Hz
 ";
 
         assert!(parse_source_exists(output, DEFAULT_SOURCE_NAME));

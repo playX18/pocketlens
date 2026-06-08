@@ -81,8 +81,8 @@ jobs:
         with:
           name: linux-binaries
           path: |
-            linux/target/release/acamera-receiver
-            linux/target/release/acamera-gtk
+            linux/target/release/pocketlens-receiver
+            linux/target/release/pocketlens-gtk
 
   build-android:
     runs-on: ubuntu-latest

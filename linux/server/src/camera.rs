@@ -20,7 +20,7 @@ pub fn setup_camera(device: &str) -> Result<()> {
             "modprobe",
             "v4l2loopback",
             &format!("video_nr={video_nr}"),
-            "card_label=ACamera",
+            "card_label=PocketLens",
             "exclusive_caps=1",
         ])
         .status()

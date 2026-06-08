@@ -1,11 +1,11 @@
 use std::net::SocketAddr;
 
-use acamera_server::{
+use anyhow::Context;
+use clap::Parser;
+use pocketlens_server::{
     camera, check_deps, cleanup, config::Cli, control, diagnostics, discovery, install, mdns,
     virtual_mic,
 };
-use anyhow::Context;
-use clap::Parser;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -101,22 +101,22 @@ async fn main() -> anyhow::Result<()> {
     let mut mdns_advertiser = match mdns::SystemMdnsAdvertiser::new() {
         Ok(advertiser) => Some(advertiser),
         Err(error) => {
-            tracing::warn!(%error, "failed to start ACamera mDNS advertiser");
+            tracing::warn!(%error, "failed to start PocketLens mDNS advertiser");
             None
         }
     };
     if let Some(advertiser) = mdns_advertiser.as_mut() {
         mdns::advertise_receiver(advertiser, &config.receiver_name, config.control_port);
         tracing::info!(
-            service_type = acamera_server::protocol::SERVICE_TYPE,
+            service_type = pocketlens_server::protocol::SERVICE_TYPE,
             receiver_name = %config.receiver_name,
             control_port = config.control_port,
-            "advertising ACamera receiver over mDNS"
+            "advertising PocketLens receiver over mDNS"
         );
     }
     let discovery_responder = discovery::spawn_udp_responder(config.clone());
 
-    tracing::info!(%bind, "starting ACamera receiver control server");
+    tracing::info!(%bind, "starting PocketLens receiver control server");
     axum::serve(listener, app)
         .with_graceful_shutdown(shutdown_signal())
         .await?;
@@ -151,5 +151,5 @@ async fn shutdown_signal() {
         _ = ctrl_c => {},
         _ = terminate => {},
     }
-    tracing::info!("stopping ACamera receiver control server");
+    tracing::info!("stopping PocketLens receiver control server");
 }

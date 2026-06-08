@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ACameraAndroid"
+rootProject.name = "PocketLensAndroid"
 include(":app")

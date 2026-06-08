@@ -22,7 +22,7 @@ pub struct DiscoveryResponse {
 pub fn spawn_udp_responder(config: ReceiverConfig) -> tokio::task::JoinHandle<()> {
     tokio::spawn(async move {
         if let Err(error) = run_udp_responder(config).await {
-            tracing::warn!(%error, "ACamera UDP discovery responder stopped");
+            tracing::warn!(%error, "PocketLens UDP discovery responder stopped");
         }
     })
 }
@@ -61,7 +61,7 @@ mod tests {
         let response = DiscoveryResponse {
             receiver_name: "Desk".to_string(),
             protocol_version: 1,
-            service_type: "_acamera._udp.local".to_string(),
+            service_type: "_pocketlens._udp.local".to_string(),
             control_port: 3769,
             capabilities: vec!["secure_pairing".to_string()],
         };

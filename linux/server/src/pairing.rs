@@ -278,7 +278,7 @@ pub fn secure_pairing_key(
     receiver_public_key: &str,
 ) -> [u8; 32] {
     crypto::derive_key(&[
-        b"acamera-secure-pairing-v1",
+        b"pocketlens-secure-pairing-v1",
         pin.as_bytes(),
         pairing_id.as_bytes(),
         phone_nonce.as_bytes(),

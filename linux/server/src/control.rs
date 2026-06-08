@@ -833,7 +833,7 @@ mod tests {
             .unwrap();
         assert_eq!(response.status(), StatusCode::OK);
         let status: StatusResponse = read_json(response).await;
-        assert_eq!(status.receiver_name, "ACamera Linux");
+        assert_eq!(status.receiver_name, "PocketLens Linux");
         assert!(status.virtual_devices.camera.ready);
     }
 

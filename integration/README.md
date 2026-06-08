@@ -1,4 +1,4 @@
-# ACamera Integration Plan
+# PocketLens Integration Plan
 
 This directory holds cross-project contract verification and end-to-end test plans.
 
@@ -17,7 +17,7 @@ Add a single command that verifies:
 - Every fixture in `contracts/fixtures/` is accepted by the Linux DTO tests.
 - Every fixture in `contracts/fixtures/` is accepted by the Android DTO tests.
 - Both sides agree on protocol version `1`.
-- Both sides agree on service type `_acamera._udp.local`.
+- Both sides agree on service type `_pocketlens._udp.local`.
 - Both sides agree on codec names `h264` and `opus`.
 - Both sides agree on quality presets `low`, `balanced`, and `high`.
 
@@ -25,7 +25,7 @@ Add a single command that verifies:
 
 Before using real Linux media devices, verify Android against a fake control/media receiver:
 
-1. Fake receiver advertises or is manually configured as `ACamera Linux`.
+1. Fake receiver advertises or is manually configured as `PocketLens Linux`.
 2. Android pairs with PIN `123456`.
 3. Android starts a session using the balanced preset.
 4. Android sends synthetic or real RTP packets to ports returned by the fake receiver.
@@ -50,8 +50,8 @@ A v1 end-to-end pass requires:
 - PIN pairing succeeds.
 - Android starts camera and microphone streaming.
 - Linux shows active session stats.
-- `ACamera` appears as a camera in desktop app selectors.
-- `ACamera Microphone` appears as a microphone in desktop app selectors.
+- `PocketLens` appears as a camera in desktop app selectors.
+- `PocketLens Microphone` appears as a microphone in desktop app selectors.
 - Zoom or Discord can select both devices.
 - Mute, pause video, camera flip, stop session, and reconnect work without restarting the daemon.
 

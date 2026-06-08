@@ -44,7 +44,7 @@ impl Default for ReceiverConfig {
 }
 
 #[derive(Debug, Parser)]
-#[command(name = "acamera-receiver")]
+#[command(name = "pocketlens-receiver")]
 #[command(about = "Linux receiver for Android camera and microphone streams")]
 pub struct Cli {
     #[arg(long, default_value_t = ReceiverConfig::default().bind_address)]
@@ -123,12 +123,12 @@ mod tests {
     fn defaults_match_linux_plan() {
         let config = ReceiverConfig::default();
         assert_eq!(config.control_port, 47650);
-        assert_eq!(config.receiver_name, "ACamera Linux");
+        assert_eq!(config.receiver_name, "PocketLens Linux");
         assert_eq!(config.default_preset, QualityPreset::Balanced);
-        assert_eq!(config.camera_device_name, "ACamera");
+        assert_eq!(config.camera_device_name, "PocketLens");
         assert_eq!(config.camera_device_path, "/dev/video10");
-        assert_eq!(config.microphone_device_name, "ACamera Microphone");
-        assert_eq!(config.microphone_sink_name, "acamera_sink");
+        assert_eq!(config.microphone_device_name, "PocketLens Microphone");
+        assert_eq!(config.microphone_sink_name, "pocketlens_sink");
         assert_eq!(config.protocol_version, 1);
         assert_eq!(config.video_port, 5004);
         assert_eq!(config.audio_port, 5006);
@@ -138,7 +138,7 @@ mod tests {
     #[test]
     fn cli_overrides_receiver_name_ports_and_diagnostic_mode() {
         let cli = Cli::parse_from([
-            "acamera-receiver",
+            "pocketlens-receiver",
             "--receiver-name",
             "Desk",
             "--control-port",
@@ -166,7 +166,7 @@ mod tests {
     #[test]
     fn cli_rejects_duplicate_ports() {
         let cli = Cli::parse_from([
-            "acamera-receiver",
+            "pocketlens-receiver",
             "--control-port",
             "5000",
             "--video-port",

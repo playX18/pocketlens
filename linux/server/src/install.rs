@@ -7,7 +7,7 @@ use anyhow::{Context, Result};
 pub fn install_app(prefix: &Path) -> Result<()> {
     let bin_dir = prefix.join("bin");
     let app_dir = prefix.join("share/applications");
-    let data_dir = prefix.join("share/acamera");
+    let data_dir = prefix.join("share/pocketlens");
 
     fs::create_dir_all(&bin_dir).context("creating bin directory")?;
     fs::create_dir_all(&app_dir).context("creating applications directory")?;
@@ -18,7 +18,7 @@ pub fn install_app(prefix: &Path) -> Result<()> {
         .parent()
         .context("resolving own parent directory")?;
 
-    for bin_name in &["acamera-receiver", "acamera-gtk"] {
+    for bin_name in &["pocketlens-receiver", "pocketlens-gtk"] {
         let src = self_dir.join(bin_name);
         if src.exists() {
             let dest = bin_dir.join(bin_name);
@@ -33,17 +33,17 @@ pub fn install_app(prefix: &Path) -> Result<()> {
 
     let apk_src = self_dir
         .parent()
-        .map(|p| p.join("share/acamera/acamera.apk"))
+        .map(|p| p.join("share/pocketlens/pocketlens.apk"))
         .filter(|p| p.exists());
     if let Some(apk) = apk_src {
-        fs::copy(&apk, data_dir.join("acamera.apk")).context("copying APK")?;
+        fs::copy(&apk, data_dir.join("pocketlens.apk")).context("copying APK")?;
     }
 
-    let exec_path = bin_dir.join("acamera-gtk");
+    let exec_path = bin_dir.join("pocketlens-gtk");
     let desktop = format!(
         "[Desktop Entry]\n\
          Type=Application\n\
-         Name=ACamera\n\
+         Name=PocketLens\n\
          Comment=Use an Android phone as a Linux camera and microphone\n\
          Exec={}\n\
          Terminal=false\n\
@@ -51,9 +51,9 @@ pub fn install_app(prefix: &Path) -> Result<()> {
          Icon=camera-web\n",
         exec_path.display()
     );
-    fs::write(app_dir.join("acamera.desktop"), desktop).context("writing .desktop file")?;
+    fs::write(app_dir.join("pocketlens.desktop"), desktop).context("writing .desktop file")?;
 
-    println!("installed ACamera to {}", prefix.display());
+    println!("installed PocketLens to {}", prefix.display());
     println!("run: {}", exec_path.display());
     Ok(())
 }
@@ -63,8 +63,8 @@ pub fn bundled_apk_path() -> Option<PathBuf> {
         && let Some(dir) = exe.parent()
     {
         let candidates = [
-            dir.join("../share/acamera/acamera.apk"),
-            dir.join("share/acamera/acamera.apk"),
+            dir.join("../share/pocketlens/pocketlens.apk"),
+            dir.join("share/pocketlens/pocketlens.apk"),
         ];
         for candidate in &candidates {
             if candidate.exists() {
